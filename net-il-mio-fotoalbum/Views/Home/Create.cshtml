@@ -1,0 +1,38 @@
+﻿@model FotoFormModel
+
+@{
+	var foto = Model;
+}
+
+<div class="container">
+	<form method="post" asp-controller="Home" asp-action="Create">
+		@Html.AntiForgeryToken()
+		<div class="mb-3">
+			<label asp-for="Foto.Titolo" class="form-label">Titolo foto</label>
+			<input type="text" asp-for="Foto.Titolo" class="form-control">
+			<span asp-validation-for="Foto.Titolo" class="text error"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Foto.Description" class="form-label">Descrizione</label>
+			<div>
+				<textarea asp-for="Foto.Description"></textarea>
+				<span asp-validation-for="Foto.Description" class="text error"></span>
+			</div>
+		</div>
+		<div class="form-field">
+			<label asp-for="CategoriesSelezionati" class="form-label">Categorie</label>
+			<select asp-for="CategoriesSelezionati" multiple="multiple" class="form-control" asp-items="@Model.Categories"></select>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Foto.Url" class="form-label">Url img</label>
+			<input type="text" asp-for="Foto.Url" class="form-control">
+			<span asp-validation-for="Foto.Url" class="text error"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Foto.Visibile" class="form-label">Rendi visibile</label>
+			<input type="checkbox" asp-for="Foto.Visibile" class="form-check-input">
+			<span asp-validation-for="Foto.Visibile" class="text error"></span>
+		</div>
+		<button class="btn btn-success my-2" type="submit">Create</button>
+	</form>
+</div>

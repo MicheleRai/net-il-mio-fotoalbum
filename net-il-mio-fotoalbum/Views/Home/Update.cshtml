@@ -1,0 +1,41 @@
+﻿@model FotoFormModel
+
+@{
+	var foto = Model;
+}
+
+<h2>Modifica la tua foto</h2>
+
+<div class="container">
+	<div class="pad">
+		<form method="post" asp-controller="Home" asp-action="Update" asp-route-id="@Model.Foto.Id" enctype="multipart/form-data">
+			@Html.AntiForgeryToken()
+			<div class="form-field">
+				<label asp-for="Foto.Titolo" class="form-label">Nome</label>
+				<input asp-for="Foto.Titolo" class="form-control" />
+				<span asp-validation-for="Foto.Titolo" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label asp-for="Foto.Description" class="form-label">Descrizione</label>
+				<textarea asp-for="Foto.Description" class="form-control"></textarea>
+				<span asp-validation-for="Foto.Description" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label asp-for="CategoriesSelezionati" class="form-label">Ingredienti</label>
+				<select asp-for="CategoriesSelezionati" multiple="multiple" class="form-control" asp-items="@Model.Categories"></select>
+			</div>
+			<div class="form-field">
+				<label asp-for="Foto.Url" class="form-label">Percorso Foto</label>
+				<input asp-for="Foto.Url" class="form-control" />
+				<span asp-validation-for="Foto.Url" class="text error"></span>
+			</div>
+			<div class="form-field">
+				<label asp-for="Foto.Visibile" class="form-label">Prezzo</label>
+				<input type="checkbox" asp-for="Foto.Visibile" class="form-check-input">
+				<span asp-validation-for="Foto.Visibile" class="text error"></span>
+			</div>
+			<button class="btn btn-success my-2" type="submit">Save</button>
+		</form>
+	</div>
+</div>
+

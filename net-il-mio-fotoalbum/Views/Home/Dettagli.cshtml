@@ -1,0 +1,42 @@
+﻿@model Foto
+
+@{
+	var foto = Model;
+}
+
+<h2>@foto.Titolo</h2>
+
+<div class="container">
+	<div class="image">
+		<img class="post-link-image" src="@foto.Url">
+	</div>
+	<div>
+		<p>
+			@foto.Description
+		</p>
+		<p>
+			<h3>Categorie</h3>
+			<div class="flex">
+				@foreach (var category in foto.Categories!)
+				{
+					<span>
+						@category.Name
+					</span>
+				}
+			</div>
+		</p>
+		<p>
+			@foto.Visibile
+		</p>
+		@*@if (User.IsInRole("Admin"))
+		{*@
+			<div class="buttonContainer justify-content-center  d-flex flex-wrap">
+				<a class="btn btn-warning m-2" href="@Url.Action("Update", "Home", new { Id = foto.Id })">Edit</a>
+				<form asp-action="Delete" asp-controller="Home" asp-route-id="@foto.Id">
+					@Html.AntiForgeryToken()
+					<button class=" btn btn-danger my-2" type="submit">Delete</button>
+				</form>
+			</div>
+		@*}*@
+	</div>
+</div>

@@ -1,0 +1,44 @@
+﻿@model Category[]
+
+@{
+
+    ViewData["Title"] = "Categorie";
+    var categories = Model;
+}
+
+
+
+
+<div class="text-center container">
+    <table class="table">
+        <thead>
+
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Action</th>
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (var categorie in categories)
+            {
+                <tr>
+                    <td>@categorie.Id</td>
+                    <td>@categorie.Name</td>
+                    <td class=" fw-bold">
+                        <a class="btn btn-warning mb-1" href="@Url.Action("Create", "Category", new {Id = categorie.Id})"><i class="fa-solid fa-pencil" style="color: #000000;"></i></a>
+
+                        <form method="post" asp-controller="Category" asp-action="Delete" asp-route-id="@categorie.Id">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa-solid fa-dumpster-fire" style="color: #000000;"></i>
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
