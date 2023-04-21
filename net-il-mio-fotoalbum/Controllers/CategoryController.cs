@@ -53,50 +53,42 @@ namespace net_il_mio_fotoalbum.Controllers
         {
             var category = _context.Categories.FirstOrDefault(c => c.Id == id);;
 
-            if (foto is null)
+            if (category is null)
             {
                 return View("NotFound");
             }
-            var formModel = new FotoFormModel
+            var formModel = new CategoryFormModel
             {
-                Foto = foto,
+                Category = category,
                 Categories = _context.Categories.ToArray().Select(i => new SelectListItem(
                     i.Name,
-                    i.Id.ToString(),
-                    foto.Categories!.Any(_i => _i.Id == i.Id))
-                ).ToArray()
+                    i.Id.ToString()))
             };
-
-            formModel.CategoriesSelezionati = formModel.Categories.Where(i => i.Selected).Select(i => i.Value).ToList();
 
             return View(formModel);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, FotoFormModel form)
-        {
-            if (!ModelState.IsValid)
-            {
-                form.Categories = _context.Categories.Select(i => new SelectListItem(i.Name, i.Id.ToString())).ToArray();
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Update(int id, CategoryFormModel form)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        form.Categories = _context.Categories.Select(i => new SelectListItem(i.Name, i.Id.ToString())).ToArray();
 
 
-                return View(form);
-            }
-            var savedFoto = _context.Fotos.Include(p => p.Categories).FirstOrDefault(p => p.Id == id);
+        //        return View(form);
+        //    }
+        //    var savedCategory = _context.Categories;
 
-            if (savedFoto is null)
-            {
-                return View("NotFound");
-            }
-            savedFoto.Titolo = form.Foto.Titolo;
-            savedFoto.Description = form.Foto.Description;
-            savedFoto.Url = form.Foto.Url;
-            savedFoto.Visibile = form.Foto.Visibile;
-            savedFoto.Categories = form.CategoriesSelezionati.Select(st => _context.Categories.First(t => t.Id == Convert.ToInt32(st))).ToList();
-            _context.SaveChanges();
+        //    if (savedCategory is null)
+        //    {
+        //        return View("NotFound");
+        //    }
+        //    savedCategory.Name = form.Category.Name;
+        //    _context.SaveChanges();
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
     }
 }
