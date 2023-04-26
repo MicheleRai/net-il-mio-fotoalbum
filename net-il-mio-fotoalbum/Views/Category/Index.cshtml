@@ -27,7 +27,7 @@
                     <td>@categorie.Id</td>
                     <td>@categorie.Name</td>
                     <td class=" fw-bold">
-                        <a class="btn btn-warning mb-1" href="@Url.Action("Create", "Category", new {Id = categorie.Id})"><i class="fa-solid fa-pencil" style="color: #000000;"></i></a>
+                        <a class="btn btn-warning mb-1" href="@Url.Action("Update", "Category", new {Id = categorie.Id})"><i class="fa-solid fa-pencil" style="color: #000000;"></i></a>
 
                         <form method="post" asp-controller="Category" asp-action="Delete" asp-route-id="@categorie.Id">
                             @Html.AntiForgeryToken()

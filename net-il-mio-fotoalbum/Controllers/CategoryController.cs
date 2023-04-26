@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using net_il_mio_fotoalbum.Models;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
         private readonly AlbumContext _context;
@@ -66,6 +68,30 @@ namespace net_il_mio_fotoalbum.Controllers
             };
 
             return View(formModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(int id, CategoryFormModel form)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                return View(form);
+            }
+
+            var catToUpdate = _context.Categories.FirstOrDefault(c => c.Id == id);
+
+            if (catToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            catToUpdate.Name = form.Category.Name;
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
         //[HttpPost]

@@ -1,0 +1,18 @@
+﻿@model CategoryFormModel;
+
+@{
+    var category = Model;
+}
+
+
+<h2 class="text-center my-3">Modifica la tua Categoria</h2>
+
+<form class="p-5" method="post" asp-action="Update" asp-controller="Category" asp-route-id="@Model.Category.Id" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <div class="mb-3">
+        <label asp-for="Category.Name" class="form-label">Nome Categoria</label>
+        <input type="text" class="form-control" asp-for="Category.Name" placeholder="Inserisci il nome della categoria">
+        <span asp-validation-for="Category.Name" class="text-warning"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Aggiorna</button>
+</form>

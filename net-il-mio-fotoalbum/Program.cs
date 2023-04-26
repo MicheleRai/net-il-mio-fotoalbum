@@ -6,6 +6,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AlbumContext>(options => options.UseSqlServer("Data Source=localhost;Initial Catalog=MioFotoalbumDb;Integrated Security=True;Pooling=False;TrustServerCertificate=True"));
 
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<AlbumContext>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 0;
+    options.Password.RequiredUniqueChars = 0;
+});
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -32,7 +46,7 @@ app.MapControllerRoute(
 	name: "default",
 	pattern: "{controller=Home}/{action=Index}/{id?}");
 
-//app.MapRazorPages();
+app.MapRazorPages();
 
 using (var scope = app.Services.CreateScope())
 using (var ctx = scope.ServiceProvider.GetService<AlbumContext>())

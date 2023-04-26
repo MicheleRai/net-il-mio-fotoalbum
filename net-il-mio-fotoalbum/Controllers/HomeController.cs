@@ -10,7 +10,8 @@ using System.Diagnostics;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
-	public class HomeController : Controller
+    [Authorize(Roles ="Admin")]
+    public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
 
@@ -28,7 +29,13 @@ namespace net_il_mio_fotoalbum.Controllers
 
 			return View(fotos);
 		}
-		public IActionResult Dettagli(int id)
+        public IActionResult ApiIndex()
+        {
+
+
+            return View();
+        }
+        public IActionResult Dettagli(int id)
 		{
 			var foto = _context.Fotos.Include(p =>p.Categories).FirstOrDefault(p => p.Id == id);
 
