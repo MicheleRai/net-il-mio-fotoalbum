@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace net_il_mio_fotoalbum.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    
     public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
@@ -23,7 +23,8 @@ namespace net_il_mio_fotoalbum.Controllers
 			_context = context;
 		}
 
-		public IActionResult Index()
+        [Authorize(Roles = "Admin")]
+        public IActionResult Index()
 		{
 			var fotos = _context.Fotos.ToArray();
 
@@ -35,6 +36,7 @@ namespace net_il_mio_fotoalbum.Controllers
 
             return View();
         }
+        [Authorize(Roles = "Admin")]
         public IActionResult Dettagli(int id)
 		{
 			var foto = _context.Fotos.Include(p =>p.Categories).FirstOrDefault(p => p.Id == id);
@@ -46,7 +48,8 @@ namespace net_il_mio_fotoalbum.Controllers
 
 			return View(foto);
 		}
-		[HttpGet]
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
 		public IActionResult Create()
 		{
 			var formModel = new FotoFormModel()
@@ -56,8 +59,8 @@ namespace net_il_mio_fotoalbum.Controllers
 
 			return View(formModel);
 		}
-
-		[HttpPost]
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public IActionResult Create(FotoFormModel form)
 		{
@@ -76,7 +79,8 @@ namespace net_il_mio_fotoalbum.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult Update(int id)
+        [Authorize(Roles = "Admin")]
+        public IActionResult Update(int id)
 		{
 			var foto = _context.Fotos.Include(p => p.Categories).FirstOrDefault(p => p.Id == id);
 
@@ -98,8 +102,8 @@ namespace net_il_mio_fotoalbum.Controllers
 
 			return View(formModel);
 		}
-
-		[HttpPost]
+        [Authorize(Roles = "Admin")]
+        [HttpPost]
 		[ValidateAntiForgeryToken]
 		public IActionResult Update(int id, FotoFormModel form)
 		{
@@ -126,7 +130,8 @@ namespace net_il_mio_fotoalbum.Controllers
 			return RedirectToAction("Index");
 		}
 
-		public IActionResult Privacy()
+        [Authorize(Roles = "Admin")]
+        public IActionResult Privacy()
 		{
 			return View();
 		}

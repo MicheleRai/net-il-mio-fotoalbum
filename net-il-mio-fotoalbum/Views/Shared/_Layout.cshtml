@@ -35,10 +35,16 @@
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input class="form-control form-control-dark w-100"
+        <form class="w-100 ms-3" asp-controller="Home" asp-action="ApiIndex">
+            <p>
+                <input class="form-control form-control-dark w-100" type="text" oninput="popola(value)" placeholder="Filtra foto per titolo" />
+            </p>
+
+        </form>
+        @*<input class="form-control form-control-dark w-100"
                 type="text"
-                placeholder="Search"
-                aria-label="Search" />
+                placeholder="search"
+                aria-label="search" />*@
 
     </header>
 

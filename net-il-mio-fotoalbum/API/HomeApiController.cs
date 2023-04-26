@@ -20,13 +20,9 @@ namespace net_il_mio_fotoalbum.API
         public IActionResult GetFoto([FromQuery] string? titolo)
         {
             var fotos = _context.Fotos
-                .Include(p => p.Categories)
-                .Where(p => (titolo == null) || (titolo != null && p.Titolo.ToLower().Contains(titolo.ToLower())))
-                .Where(p => p.Visibile)
-                .ToList();
+               .Where(p => titolo == null || p.Titolo.ToLower().Contains(titolo.ToLower()))
+               .ToList();
 
-            foreach (var foto in fotos) ;
-           
 
             return Ok(fotos);
             
@@ -40,8 +36,6 @@ namespace net_il_mio_fotoalbum.API
             {
                 return NotFound();
             }
-
-            foreach (var cat in foto.Categories) cat.Fotos = null;
 
             return Ok(foto);
         }

@@ -3,9 +3,9 @@
 
 // Write your JavaScript code.
 
-const initialize = filter => getFotos(filter).then(fotos => renderCards(fotos));
+const popola = filter => getFotos(filter).then(renderCards);
 
-const getFotos = tiolo => axios.get('/Api/Foto', titolo ? { params: { titolo } } : {}).then(res => res.data).catch(error => error);
+const getFotos = titolo => axios.get('/Api/HomeApi', titolo ? { params: { titolo } } : {}).then(res => res.data).catch(error => error);
 
 const renderCards = fotos => {
     const cards = document.getElementById('cards');
@@ -15,20 +15,15 @@ const renderCards = fotos => {
 const fotoComponent = foto => `
     <div class="col-lg-4 mb-3 d-flex align-items-stretch">
         <div class="card my-3" >
-            @*style="width: 20rem"*@
-            <img src=${foto.Url} class="card-img-top " alt="foto">
+            <img src=${foto.url} class="card-img-top " alt="foto">
             <div class="card-body d-flex flex-column text-center">
-                <h5 class="card-title ">${foto.Titolo}</h5>
-                <p class="card-text">${foto.Description}</p>
+                <h5 class="card-title ">${foto.titolo}</h5>
+                <p class="card-text">${foto.description}</p>
             </div>
         </div>
     </div>
 
 `;
-const loadCategories = () => getCategories();
 
-const getCategories = () => axios
-    .get("/Api/Category")
-    .then(res => res.data);
 
 
