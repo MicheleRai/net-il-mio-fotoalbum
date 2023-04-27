@@ -7,13 +7,28 @@
 <main class="pt-4">
 
     <div class="container">
-        @*foto container*@
         <div id="cards" class="d-flex justify-content-center row row-cols-2 flex-wrap"></div>
     </div>
+	<div class="container">
+		<div class="pad">
+			<form id="messaggio-create-form">
+				<div class="form-field">
+					<label class="form-label" for="email">Email</label>
+					<input class="form-control" type="email" id="email" placeholder="Inserisci la tua Email" />
+				</div>
+				<div class="form-field">
+					<label class="form-label" for="Testo">Testo</label>
+					<textarea class="form-control" id="Testo"></textarea>
+				</div>
+				<button class="btn btn-success my-2" id="submit" type="submit">Invia messaggio</button>
+			</form>
+		</div>
+	</div>
 </main>
 
 @section Scripts {
     <script>
         popola();
+        initCreateForm();
     </script>
 }

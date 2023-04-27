@@ -39,5 +39,15 @@ namespace net_il_mio_fotoalbum.API
 
             return Ok(foto);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateMessage(Messaggio messagio)
+        {
+            _context.Messagi.Add(messagio);
+            _context.SaveChanges();
+
+            return Ok(messagio);
+        }
     }
 }

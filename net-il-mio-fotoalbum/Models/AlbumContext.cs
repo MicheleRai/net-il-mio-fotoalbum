@@ -11,6 +11,8 @@ namespace net_il_mio_fotoalbum.Models
 		public DbSet<Foto> Fotos { get; set; }
 		public DbSet<Category> Categories { get; set; }
 
+		public DbSet<Messaggio> Messagi { get; set; }
+
 		public void Seed() 
 		{
 			var fotos = new Foto[]
@@ -101,6 +103,20 @@ namespace net_il_mio_fotoalbum.Models
                 };
 
                 UserRoles.AddRange(seed);
+            }
+
+            if (!Messagi.Any())
+            {
+				var seed = new Messaggio[]
+				{
+					new()
+					{
+						Email = "provamessaggio@gmail.com",
+						Testo = "ciao"
+
+                    }
+                };
+				Messagi.AddRange(seed);
             }
 
 
