@@ -19,10 +19,10 @@ namespace net_il_mio_fotoalbum.API
         [HttpGet]
         public IActionResult GetFoto([FromQuery] string? titolo)
         {
-            var fotos = _context.Fotos
-               .Where(p => titolo == null || p.Titolo.ToLower().Contains(titolo.ToLower()))
-               .ToList();
 
+            var fotos = _context.Fotos
+               .Where(p => p.Visibile && (titolo == null || p.Titolo.ToLower().Contains(titolo.ToLower())))
+               .ToList();
 
             return Ok(fotos);
             

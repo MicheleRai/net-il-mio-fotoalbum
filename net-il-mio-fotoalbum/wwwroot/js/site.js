@@ -28,7 +28,7 @@ const fotoComponent = foto => `
 `;
 
 //const visible = document.querySelector('.vis');
-//if (foto.visible) {
+//if (foto.visibile) {
 //    visible.classList.add("d-none");
 //} else {
 //    visible.classList.remove("d-none");
@@ -38,7 +38,7 @@ const fotoComponent = foto => `
 
 //Messaggio
 
-const messaggioMessaggio = messaggio => axios
+const postMessaggio = messaggio => axios
     .post("/Home/ApiIndex", messaggio)
     .then(() => location.href = "/Home/ApiIndex")
     .catch(err => renderErrors(err.response.data.errors));
@@ -52,7 +52,7 @@ const initCreateForm = () => {
         e.preventDefault();
 
         const messaggio = getMessaggioFromForm(form);
-        messaggioMessaggio(messaggio);
+        postMessaggio(messaggio);
         email.value = '';
         testo.value = '';
     });
