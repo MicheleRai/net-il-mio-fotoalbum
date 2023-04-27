@@ -1,5 +1,41 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Messaggio[]
+
 @{
+    var messaggi = Model;
 }
+
+<div class="text-center container">
+    <table class="table">
+        <thead>
+
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Testo</th>
+                <th scope="col">Action</th>
+
+            </tr>
+
+        </thead>
+        <tbody>
+            @foreach (Messaggio mes in messaggi)
+            {
+                <tr>
+                    <td>@mes.Id</td>
+                    <td>@mes.Email</td>
+                    <td>@mes.Testo</td>
+                    <td class=" fw-bold">
+                        
+                        <form method="post" asp-controller="Messaggio" asp-action="Delete" asp-route-id="@mes.Id">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fa-solid fa-dumpster-fire" style="color: #000000;"></i>
+                            </button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

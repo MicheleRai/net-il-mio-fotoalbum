@@ -17,7 +17,7 @@ namespace net_il_mio_fotoalbum.API
         }
 
         [HttpGet]
-        public IActionResult GetFoto([FromQuery] string? titolo)
+        public IActionResult GetFotos([FromQuery] string? titolo)
         {
 
             var fotos = _context.Fotos
@@ -41,7 +41,6 @@ namespace net_il_mio_fotoalbum.API
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public IActionResult CreateMessage(Messaggio messagio)
         {
             _context.Messagi.Add(messagio);

@@ -10,7 +10,7 @@ namespace net_il_mio_fotoalbum.Controllers
         {
             _context = context;
         }
-        public IActionResult MessaggiIndex()
+        public IActionResult Index()
         {
             var messaggi = _context.Messagi.ToArray();
             return View(messaggi);
@@ -27,7 +27,7 @@ namespace net_il_mio_fotoalbum.Controllers
             }
             _context.Messagi.Remove(DeleteMessaggio);
             _context.SaveChanges();
-            return RedirectToAction("MessaggiIndex");
+            return RedirectToAction("Index");
         }
 
     }

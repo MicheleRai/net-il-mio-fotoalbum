@@ -36,6 +36,12 @@ namespace net_il_mio_fotoalbum.Controllers
 
             return View();
         }
+        public IActionResult ApiDettagli()
+        {
+
+
+            return View();
+        }
         [Authorize(Roles = "Admin")]
         public IActionResult Dettagli(int id)
 		{
